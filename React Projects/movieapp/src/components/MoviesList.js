@@ -28,7 +28,7 @@ export class MovieList extends Component {
   render() {
 
     console.log('render second')
-
+    let moviesArr = movie.results;
     ////to get the movies name
     // console.log(moviesArr)
     // return (
