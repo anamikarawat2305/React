@@ -75,6 +75,35 @@ export class MovieList extends Component {
     }
   }
 
+
+  handleFavourites = (movieObj) => {
+    let oldData = JSON.parse(localStorage.getItem('movies-app') || '[]')
+
+    if (this.state.favourites.includes(movieObj.id)) {
+      oldData = oldData.filter((movie) => movie.id != movieObj.id)
+    }
+
+    else {
+      oldData.push(movieObj)
+    }
+
+    localStorage.setItem("movies-app", JSON.stringify(oldData))
+    console.log(oldData)
+
+    this.handleFavouritesState()
+  }
+
+  handleFavouritesState = () => {
+    let oldData = JSON.parse(localStorage.getItem('movies-app') || '[]')
+    let temp = oldData.map((movie) => movie.id)
+
+    this.setState({
+      favourites: [...temp]
+    })
+
+
+  }
+
   render() {
 
     console.log('render second')
@@ -124,9 +153,14 @@ export class MovieList extends Component {
               >
                 {this.state.hover == movieElem.id && (
                   <a
-                    href="#"
+                   
                     className="btn btn-primary movies-button text-center"
+                    onClick={() => this.handleFavourites(movieElem)}
                   >
+                    {this.state.favourites.includes(movieElem.id) ? "Remove from Favorites" : 'Add to Favourites'}
+
+
+
                     Add to Favourites
                   </a>
                 )}
@@ -138,14 +172,14 @@ export class MovieList extends Component {
           <nav aria-label="Page navigation example">
             <ul className="pagination">
               <li className="page-item">
-                <a className="page-link"  onClick={this.handlePrevious}>
+                <a className="page-link" onClick={this.handlePrevious}>
                   Previous
                 </a>
               </li>
 
               {this.state.parr.map((value) => (
                 <li className="page-item">
-                  <a className="page-link" onClick={()=> this.handlePageClick(value)}>
+                  <a className="page-link" onClick={() => this.handlePageClick(value)}>
                     {value}
                   </a>
                 </li>
