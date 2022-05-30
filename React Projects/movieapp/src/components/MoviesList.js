@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 //https://www.themoviedb.org/documentation/api API Movie Database
 
-//import { movies } from '../movieData'
+import { movies } from '../movieData';
 import axios from 'axios'
 
 export class MovieList extends Component {
