@@ -14,17 +14,20 @@ export class MovieList extends Component {
       parr: [1],
       movies: [],
       currPage: 1,
+      favourites : []
+
     };
+
   }
   async componentDidMount() {
-    const res = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=a6e4b08611b7c42ef51d22afd6405f81&language=en-US&page=${this.state.currPage}`)
-    let movieData = res.data
-    console.log(movieData)
+    const res = await axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=a6e4b08611b7c42ef51d22afd6405f81&language=en-US&page=${this.state.currPage}`);
+    let movieData = res.data;
+    console.log(movieData);
     this.setState({
-      movies: [...movieData.results]
-    })
+      movies: [...movieData.results],
+    });
 
-    console.log('mounting done with CDM third')
+    console.log('mounting done with CDM third');
   }
 
   changeMovies = async () => {
